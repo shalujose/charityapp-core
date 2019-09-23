@@ -12,10 +12,12 @@ import com.revature.Model.Request;
 import com.revature.Model.Transaction;
 import com.revature.Model.User;
 import com.revature.Util.ConnectionUtil;
+import com.revature.Util.Logger;
 import com.revature.exception.DBException;
 
 public class AdminDAO implements AdminDAOImp { // implementation of AdminDAOImp interface for AdminDAO
 
+	private static final Logger logger=Logger.getInstance(); 
 	public void fund_request(int category_Id, double amount) throws Exception { // This method is used for generate fund request
 
 		Connection con = ConnectionUtil.getConnection();
@@ -27,7 +29,7 @@ public class AdminDAO implements AdminDAOImp { // implementation of AdminDAOImp 
 			pst.setInt(1, category_Id);
 			pst.setDouble(2, amount);
 			pst.executeUpdate();
-			System.out.println("\nYour Request has been successfully sended");
+			logger.debug("Your Request has been successfully sended");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DBException("Unable to make fund request ", e);
@@ -173,7 +175,7 @@ public class AdminDAO implements AdminDAOImp { // implementation of AdminDAOImp 
 			pst.setInt(1, request_id);
 
 			pst.executeUpdate();
-			System.out.println("\nYour Request is Closed!!! ");
+			logger.debug(" Your Request is Closed!!! ");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DBException("Unable to close request", e);
@@ -193,7 +195,7 @@ public class AdminDAO implements AdminDAOImp { // implementation of AdminDAOImp 
 			pst = con.prepareStatement(sql);
 			pst.setString(1, password);
 			pst.executeUpdate();
-			System.out.println("\nYour Password is changed!!! ");
+			logger.debug(" Your Password is changed!!! ");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DBException("Unable to change password", e);
@@ -213,7 +215,7 @@ public class AdminDAO implements AdminDAOImp { // implementation of AdminDAOImp 
 			pst = con.prepareStatement(sql);
 			pst.setString(1, category_name);
 			pst.executeUpdate();
-			System.out.println("\nNew category added successfully!!!");
+			logger.debug(" New category added successfully!!!");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DBException("Unable to add new category ", e);

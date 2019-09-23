@@ -11,10 +11,12 @@ import com.revature.Model.User;
 //import com.revature.charityapp.Services.AdminServices;
 //import com.revature.charityapp.Services.CharityClass;
 import com.revature.Util.ConnectionUtil;
+import com.revature.Util.Logger;
 import com.revature.exception.DBException;
 
 public class UserDAO implements IUserDAO {
 
+	private static final Logger logger=Logger.getInstance();
 	public void register(User user) throws DBException {
 
 		Connection con = null;
@@ -32,8 +34,8 @@ public class UserDAO implements IUserDAO {
 			pst.setString(6, user.getPassword());
 
 			pst.executeUpdate();
-			//System.out.println("\nYour registration Successfully completed");
-			//CharityClass.welcomePage();
+			logger.debug("Your registration Successfully completed");
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DBException("Unable to insert donor data", e);
@@ -95,7 +97,7 @@ public class UserDAO implements IUserDAO {
 			pst.setInt(3, donor_id);
 			pst.setDouble(4, amount);
 			pst.executeUpdate();
-			System.out.println("\nYour Transaction Successfully completed\n");
+			logger.debug("Your Transaction Successfully completed\n");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DBException("Unable to transfer fund", e);

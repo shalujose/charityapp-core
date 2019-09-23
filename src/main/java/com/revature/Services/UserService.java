@@ -13,17 +13,21 @@ import com.revature.exception.DBException;
 public class UserService {
 	
 	UserDAO userdao=new UserDAO();
-	public void registerNow(User user) {
+	public User registerNow(User user) {
 		try {
 			userdao.register(user);
 		} catch (DBException e) {
 			e.printStackTrace();
 		}
+		return user;
 	}
-	public User findByNameAndPassword(String email, String password) {
+	public User findByNameAndPassword(String email, String password) throws Exception {
 		User user=null;
 		try {
 			user = userdao.findByNamePassword(email, password);
+			if(user==null) {
+				throw new Exception("Invalid login");
+			}
 		} catch (DBException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -68,4 +72,5 @@ public class UserService {
 			e.printStackTrace();
 		}
 	}
+	
 }
