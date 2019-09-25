@@ -13,7 +13,7 @@ public class DonorValidator {
 
 	// validating password
 	public static void passwordValidation(String userName, String password) throws ValidatorException {
-		// System.out.println("Username:" + userName + ",password:" + password);
+	
 		if (password == null) {
 			throw new ValidatorException("\nPassword cannot be null ");
 		}

@@ -1,4 +1,4 @@
-package com.revature.Model;
+package com.revature.model;
 
 public class User {
 		@Override

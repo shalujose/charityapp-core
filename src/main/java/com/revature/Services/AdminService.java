@@ -1,20 +1,22 @@
-package com.revature.Services;
+package com.revature.services;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import com.revature.Model.Amount;
-import com.revature.Model.Category;
-import com.revature.Model.Transaction;
-import com.revature.Model.User;
+import com.revature.model.Amount;
+import com.revature.model.Category;
+import com.revature.model.Transaction;
+import com.revature.model.User;
 import com.revature.dao.AdminDAO;
 import com.revature.dao.AdminDAOImp;
 import com.revature.dao.IUserDAO;
 import com.revature.dao.UserDAO;
 import com.revature.exception.DBException;
+import com.revature.util.Logger;
 
 public class AdminService {
 
+	private static final Logger logger=Logger.getInstance();
 	AdminDAO admindao=new AdminDAO();
 	public User findByAdminNameAndPassword(String name, String password) {
 		User user=null;
@@ -29,16 +31,16 @@ public class AdminService {
 		
 	}
 	
-	public void sendFundRequest(int category_Id, double amount) throws Exception {
+	public void sendFundRequest(int categoryId, double amount) throws Exception {
 		try {
-			admindao.fund_request(category_Id,amount);
+			admindao.fundRequest(categoryId,amount);
 		} catch (DBException e) {
 			e.printStackTrace();
 		}
 	}
-	public void addCategory(String category_name) {
+	public void addCategory(String categoryName) {
 		try {
-			admindao.addCategory(category_name);
+			admindao.addCategory(categoryName);
 		} catch (DBException e) {
 			e.printStackTrace();
 		}
@@ -64,16 +66,16 @@ public class AdminService {
 		StringBuilder content=new StringBuilder();
         content.append("transaction_id\t\tdate_of_transaction\t\tfundrequest_id\tcate_id\t\tdonor_id\tname\t\tamount\n");
 		for (Transaction admin : list) {
-			 content.append(admin.getTransaction_id()).append("\t\t\t");
-	            content.append(admin.getDate_of_transaction()).append("\t\t\t");
-	            content.append(admin.getFundrequest_id()).append("\t");
-	            content.append(admin.getCate_id()).append("\t\t");
-	            content.append(admin.getDonor_id()).append("\t\t");
+			 content.append(admin.getTransactionId()).append("\t\t\t");
+	            content.append(admin.getDateOfTransaction()).append("\t\t\t");
+	            content.append(admin.getFundrequestId()).append("\t");
+	            content.append(admin.getCategoryId()).append("\t\t");
+	            content.append(admin.getDonorId()).append("\t\t");
 	            content.append(admin.getName()).append("\t\t");
 	            content.append(admin.getAmount()).append("\t\t");
 	            content.append("\n");
 	        }
-	        System.out.println(content);
+	        logger.info(content);
 		}
 	public List<Category> viewCategory()
 	{
@@ -93,11 +95,9 @@ public class AdminService {
 		for (Category admin : list) {
 			 content.append(admin.getCategory_id()).append("\t\t");
 	            content.append(admin.getCategory_name()).append("\t\t");
-	            //content.append(admin.getFundrequest_id()).append("\t");
-	            
 	            content.append("\n");
 	        }
-	        System.out.println(content);
+	        logger.info(content);
 		}
 	
 	public List<Amount> closeRequest()
@@ -122,6 +122,6 @@ public class AdminService {
 	            
 	            content.append("\n");
 	        }
-	        System.out.println(content);
+	        logger.info(content);
 		}
 }

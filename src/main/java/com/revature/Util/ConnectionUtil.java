@@ -1,4 +1,4 @@
-package com.revature.Util;
+package com.revature.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,15 +7,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ConnectionUtil {
+	private static final ConnectionUtil INSTANCE = new ConnectionUtil();
+	private static final Logger logger = Logger.getInstance();
 
 	private static final String driverClassName = "com.mysql.cj.jdbc.Driver";
-/*	private static final String url = "jdbc:mysql://trainingdb.ck1ayq0lncmp.ap-south-1.rds.amazonaws.com:3306/shalu_db";
+	private static final String url = "jdbc:mysql://trainingdb.ck1ayq0lncmp.ap-south-1.rds.amazonaws.com:3306/shalu_db";
 	private static final String username = "shalu";
-	private static final String password = "shaluy";
-	*/
-	private static final String url = "jdbc:mysql://localhost:3306/charity_db";
-	private static final String username = "root";
-	private static final String password = "root";
+	private static final String password = "shalu";
+
+	public static ConnectionUtil getInstance() {
+		return INSTANCE;
+	}
 
 	public static Connection getConnection() {
 
@@ -37,16 +39,14 @@ public class ConnectionUtil {
 	}
 
 	public static void close(Connection con, PreparedStatement pst) {
-
 		try {
 			if (pst != null)
 				pst.close();
 			if (con != null)
 				con.close();
 		} catch (Exception e) {
-			System.out.println("Unable to close connection");
+			e.printStackTrace();
 		}
-
 	}
 
 	public static void closeRs(ResultSet rs) {
@@ -54,11 +54,7 @@ public class ConnectionUtil {
 			try {
 				rs.close();
 			} catch (SQLException e) {
-				System.out.println("Unable to close ResultSet");
+				logger.debug("Unable to close ResultSet");
 			}
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(getConnection());
 	}
 }

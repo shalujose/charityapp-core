@@ -1,10 +1,11 @@
-package com.revature.Services;
+package com.revature.services;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import com.revature.Model.Request;
-import com.revature.Model.User;
+import com.revature.model.Request;
+import com.revature.model.User;
+import com.revature.util.Logger;
 import com.revature.dao.AdminDAO;
 import com.revature.dao.AdminDAOImp;
 import com.revature.dao.UserDAO;
@@ -12,6 +13,7 @@ import com.revature.exception.DBException;
 
 public class UserService {
 	
+	private static final Logger logger=Logger.getInstance();
 	UserDAO userdao=new UserDAO();
 	public User registerNow(User user) {
 		try {
@@ -47,7 +49,6 @@ public class UserService {
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
-		//return list;
 		return list;
 	}
 	public static void display(List<Request> list) {
@@ -62,12 +63,12 @@ public class UserService {
 	            content.append(admin.getStatus()).append("\t\t");
 	            content.append("\n");
 	        }
-	        System.out.println(content);
+	        logger.info(content);
 		}
-	public void donateFundService(int fundrequest_id, int cate_id, int donor_id, double amount) {
+	public void donateFundService(int fundrequestId, int cateId, int donorId, double amount) {
 		
 		try {
-			UserDAO.donateFund(fundrequest_id, cate_id, donor_id, amount);
+			UserDAO.donateFund(fundrequestId, cateId, donorId, amount);
 		} catch (DBException e) {
 			e.printStackTrace();
 		}

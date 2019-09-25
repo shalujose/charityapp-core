@@ -1,5 +1,7 @@
 package dao;
 
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.Test;
 
 import com.revature.validator.DonorValidator;
@@ -17,6 +19,7 @@ public class TestPasswordValidator {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		assertNotNull(name);
 	}
 	public void testInvalid() {
 
@@ -28,6 +31,7 @@ public class TestPasswordValidator {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		assertNotNull(password);
 	}
 
 }

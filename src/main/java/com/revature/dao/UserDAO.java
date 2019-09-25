@@ -6,12 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import com.revature.Model.Category;
-import com.revature.Model.User;
-//import com.revature.charityapp.Services.AdminServices;
-//import com.revature.charityapp.Services.CharityClass;
-import com.revature.Util.ConnectionUtil;
-import com.revature.Util.Logger;
+import com.revature.model.Category;
+import com.revature.model.User;
+import com.revature.util.ConnectionUtil;
+import com.revature.util.Logger;
 import com.revature.exception.DBException;
 
 public class UserDAO implements IUserDAO {

@@ -1,6 +1,6 @@
-package com.revature.Util;
+package com.revature.util;
 
-public class ErrorConstants {
+public class MessageConstants {
 
 	public static final String LOGIN_ERROR="Invalid data";
 	public static final String REGISTER_ERROR="Unable to register";

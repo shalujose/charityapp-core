@@ -1,4 +1,4 @@
-package com.revature.Model;
+package com.revature.model;
 
 public class Category {
 	private int category_id;

@@ -7,18 +7,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.revature.Model.Amount;
-import com.revature.Model.Request;
-import com.revature.Model.Transaction;
-import com.revature.Model.User;
-import com.revature.Util.ConnectionUtil;
-import com.revature.Util.Logger;
+import com.revature.model.Amount;
+import com.revature.model.Request;
+import com.revature.model.Transaction;
+import com.revature.model.User;
+import com.revature.util.ConnectionUtil;
+import com.revature.util.Logger;
 import com.revature.exception.DBException;
 
 public class AdminDAO implements AdminDAOImp { // implementation of AdminDAOImp interface for AdminDAO
 
 	private static final Logger logger=Logger.getInstance(); 
-	public void fund_request(int category_Id, double amount) throws Exception { // This method is used for generate fund request
+	public void fundRequest(int categoryId, double amount) throws DBException { // This method is used for generate fund request
 
 		Connection con = ConnectionUtil.getConnection();
 		PreparedStatement pst = null;
@@ -26,7 +26,7 @@ public class AdminDAO implements AdminDAOImp { // implementation of AdminDAOImp 
 		try {
 
 			pst = con.prepareStatement(sql);
-			pst.setInt(1, category_Id);
+			pst.setInt(1, categoryId);
 			pst.setDouble(2, amount);
 			pst.executeUpdate();
 			logger.debug("Your Request has been successfully sended");
@@ -115,12 +115,12 @@ public class AdminDAO implements AdminDAOImp { // implementation of AdminDAOImp 
 		double amount = rs.getInt("amount");
 
 		Transaction response = new Transaction();
-		response.setTransaction_id(transactionId);
-		response.setDate_of_transaction(dateOfTransaction);
-		response.setFundrequest_id(fundRequestId);
-		response.setCate_id(cateId);
+		response.setTransactionId(transactionId);
+		response.setDateOfTransaction(dateOfTransaction);
+		response.setFundrequestId(fundRequestId);
+		response.setCategoryId(cateId);
 		response.setName(name);
-		response.setDonor_id(donorId);
+		response.setDonorId(donorId);
 		response.setAmount(amount);
 		return response;
 	}
@@ -185,7 +185,7 @@ public class AdminDAO implements AdminDAOImp { // implementation of AdminDAOImp 
 
 	}
 
-	public void resetPasword(String password) throws Exception { // This method is used for reset admin password
+	public void resetPasword(String password) throws DBException { // This method is used for reset admin password
 
 		Connection con = ConnectionUtil.getConnection();
 		PreparedStatement pst = null;
@@ -205,7 +205,7 @@ public class AdminDAO implements AdminDAOImp { // implementation of AdminDAOImp 
 
 	}
 
-	public void addCategory(String category_name) throws DBException { // addCategory() used to add different request categories 
+	public void addCategory(String categoryName) throws DBException { // addCategory() used to add different request categories 
 
 		Connection con = ConnectionUtil.getConnection();
 		PreparedStatement pst = null;
@@ -213,7 +213,7 @@ public class AdminDAO implements AdminDAOImp { // implementation of AdminDAOImp 
 		try {
 
 			pst = con.prepareStatement(sql);
-			pst.setString(1, category_name);
+			pst.setString(1, categoryName);
 			pst.executeUpdate();
 			logger.debug(" New category added successfully!!!");
 		} catch (SQLException e) {
