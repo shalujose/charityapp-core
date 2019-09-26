@@ -45,7 +45,7 @@ public class ConnectionUtil {
 			if (con != null)
 				con.close();
 		} catch (SQLException e) {
-			logger.debug(Messageconstants.CLOSE_CONNECTION);
+			logger.debug(MessageConstants.CLOSE_CONNECTION);
 		}
 	}
 
@@ -54,7 +54,7 @@ public class ConnectionUtil {
 			try {
 				rs.close();
 			} catch (SQLException e) {
-				logger.debug(Messageconstants.CLOSE_CONNECTION);
+				logger.debug(MessageConstants.CLOSE_CONNECTION);
 			}
 	}
 }
