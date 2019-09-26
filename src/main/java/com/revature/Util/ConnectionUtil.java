@@ -19,20 +19,20 @@ public class ConnectionUtil {
 		return INSTANCE;
 	}
 
-	public static Connection getConnection() {
+	public static Connection getConnection() throws SQLException {
 
 		Connection con = null;
 
 		try {
 			Class.forName(driverClassName);
 			con = DriverManager.getConnection(url, username, password);
-			System.out.println(con);
+			logger.info(con);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			throw new RuntimeException("Unable to load the driver class");
-		} catch (SQLException e) {
+			throw new SQLException("Unable to load the driver class");
+		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("Unable to get DB Connection");
+			throw new SQLException("Unable to get DB Connection");
 		}
 
 		return con;
@@ -44,8 +44,8 @@ public class ConnectionUtil {
 				pst.close();
 			if (con != null)
 				con.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (SQLException e) {
+			logger.debug(Messageconstants.CLOSE_CONNECTION);
 		}
 	}
 
@@ -54,7 +54,7 @@ public class ConnectionUtil {
 			try {
 				rs.close();
 			} catch (SQLException e) {
-				logger.debug("Unable to close ResultSet");
+				logger.debug(Messageconstants.CLOSE_CONNECTION);
 			}
 	}
 }

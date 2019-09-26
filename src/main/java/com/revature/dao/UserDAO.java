@@ -72,8 +72,9 @@ public class UserDAO implements IUserDAO {
 		String email = rs.getString("email");
 		String password = rs.getString("password");
 		int id = rs.getInt("id");
+	
 		User user = new User();
-		user.setName(email);
+		user.setEmail(email);
 		user.setPassword(password);
 		user.setId(id);
 

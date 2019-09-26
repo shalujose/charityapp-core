@@ -23,12 +23,12 @@ public class UserService {
 		}
 		return user;
 	}
-	public User findByNameAndPassword(String email, String password) throws Exception {
+	public User findByNameAndPassword(String email, String password) throws DBException {
 		User user=null;
 		try {
 			user = userdao.findByNamePassword(email, password);
 			if(user==null) {
-				throw new Exception("Invalid login");
+				throw new DBException("Invalid login");
 			}
 		} catch (DBException e) {
 			e.printStackTrace();

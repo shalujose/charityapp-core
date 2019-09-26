@@ -31,7 +31,7 @@ public class AdminService {
 		
 	}
 	
-	public void sendFundRequest(int categoryId, double amount) throws Exception {
+	public void sendFundRequest(int categoryId, double amount) throws DBException {
 		try {
 			admindao.fundRequest(categoryId,amount);
 		} catch (DBException e) {
