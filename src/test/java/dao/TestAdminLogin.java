@@ -1,15 +1,16 @@
 package dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.sql.SQLException;
 
 import org.junit.Test;
 
-import com.revature.Model.User;
 import com.revature.dao.IUserDAO;
 import com.revature.dao.UserDAO;
 import com.revature.exception.DBException;
+import com.revature.model.User;
 
 public class TestAdminLogin {
 

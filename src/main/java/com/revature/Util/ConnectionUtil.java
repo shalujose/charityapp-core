@@ -19,7 +19,7 @@ public class ConnectionUtil {
 		return INSTANCE;
 	}
 
-	public static Connection getConnection() throws SQLException {
+	public static Connection getConnection() {
 
 		Connection con = null;
 
@@ -29,10 +29,10 @@ public class ConnectionUtil {
 			logger.info(con);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			throw new SQLException("Unable to load the driver class");
+			throw new RuntimeException("Unable to load the driver class");
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new SQLException("Unable to get DB Connection");
+			throw new RuntimeException("Unable to get DB Connection");
 		}
 
 		return con;
