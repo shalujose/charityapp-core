@@ -64,12 +64,11 @@ public class AdminService {
 	}
 	public static void displayTrans(List<Transaction> list) {
 		StringBuilder content=new StringBuilder();
-        content.append("transaction_id\t\tdate_of_transaction\t\tfundrequest_id\tcate_id\t\tdonor_id\tname\t\tamount\n");
+        content.append("transaction_id\t\tdate_of_transaction\t\tfundrequest_id\t\tdonor_id\tname\t\tamount\n");
 		for (Transaction admin : list) {
 			 content.append(admin.getTransactionId()).append("\t\t\t");
 	            content.append(admin.getDateOfTransaction()).append("\t\t\t");
 	            content.append(admin.getFundrequestId()).append("\t");
-	            content.append(admin.getCategoryId()).append("\t\t");
 	            content.append(admin.getDonorId()).append("\t\t");
 	            content.append(admin.getName()).append("\t\t");
 	            content.append(admin.getAmount()).append("\t\t");

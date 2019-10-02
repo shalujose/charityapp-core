@@ -84,19 +84,18 @@ public class UserDAO implements IUserDAO {
 	}
 
 	
-	public static void donateFund(int fundrequest_id, int cate_id, int donor_id, double amount) throws DBException {
+	public static void donateFund(int fundrequestId, int donorId, double amount) throws DBException {
 
 		Connection con = null;
 		PreparedStatement pst = null;
-		String sql = "insert into transactions(fundrequest_id,cate_id,donor_id,amount) values ( ?,?,?,?)";
+		String sql = "insert into transactions(fundrequest_id,donor_id,amount) values ( ?,?,?)";
 
 		try {
 			con = ConnectionUtil.getConnection();
 			pst = con.prepareStatement(sql);
-			pst.setInt(1, fundrequest_id);
-			pst.setInt(2, cate_id);
-			pst.setInt(3, donor_id);
-			pst.setDouble(4, amount);
+			pst.setInt(1, fundrequestId);
+			pst.setInt(2, donorId);
+			pst.setDouble(3, amount);
 			pst.executeUpdate();
 			logger.debug("Your Transaction Successfully completed\n");
 		} catch (SQLException e) {

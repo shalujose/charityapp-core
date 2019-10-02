@@ -65,10 +65,10 @@ public class UserService {
 	        }
 	        logger.info(content);
 		}
-	public void donateFundService(int fundrequestId, int cateId, int donorId, double amount) {
+	public void donateFundService(int fundrequestId, int donorId, double amount) {
 		
 		try {
-			UserDAO.donateFund(fundrequestId, cateId, donorId, amount);
+			UserDAO.donateFund(fundrequestId, donorId, amount);
 		} catch (DBException e) {
 			e.printStackTrace();
 		}

@@ -87,7 +87,7 @@ public class AdminDAO implements AdminDAOImp { // implementation of AdminDAOImp 
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		try {
-			String sql = "select t.transaction_id,t.date_of_transaction,t.fundrequest_id,t.cate_id,d.name,t.donor_id,t.amount from transactions t inner join donors_details d where t.donor_id=d.id order by t.transaction_id";
+			String sql = "select t.transaction_id,t.date_of_transaction,t.fundrequest_id,d.name,t.donor_id,t.amount from transactions t inner join donors_details d where t.donor_id=d.id order by t.transaction_id";
 			pst = con.prepareStatement(sql);
 			rs = pst.executeQuery();
 			List<Transaction> list = new ArrayList<Transaction>(); // ArrayList for display the transaction data
@@ -109,7 +109,6 @@ public class AdminDAO implements AdminDAOImp { // implementation of AdminDAOImp 
 		int transactionId = rs.getInt("transaction_id");
 		String dateOfTransaction = rs.getString("date_of_transaction");
 		int fundRequestId = rs.getInt("fundrequest_id");
-		int cateId = rs.getInt("cate_id");
 		String name=rs.getString("name");
 		int donorId = rs.getInt("donor_id");
 		double amount = rs.getInt("amount");
@@ -118,7 +117,6 @@ public class AdminDAO implements AdminDAOImp { // implementation of AdminDAOImp 
 		response.setTransactionId(transactionId);
 		response.setDateOfTransaction(dateOfTransaction);
 		response.setFundrequestId(fundRequestId);
-		response.setCategoryId(cateId);
 		response.setName(name);
 		response.setDonorId(donorId);
 		response.setAmount(amount);
