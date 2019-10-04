@@ -35,8 +35,7 @@ public class UserDAO implements IUserDAO {
 			logger.debug("Your registration Successfully completed");
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DBException("Unable to insert donor data", e);
+			throw new DBException("Email-id and Password must be unique", e);
 		} finally {
 			ConnectionUtil.close(con, pst);
 		}
@@ -70,13 +69,11 @@ public class UserDAO implements IUserDAO {
 	private User toRow(ResultSet rs) throws SQLException {
 
 		String email = rs.getString("email");
-		String password = rs.getString("password");
 		int id = rs.getInt("id");
 		String name=rs.getString("name");
 	
 		User user = new User();
 		user.setEmail(email);
-		user.setPassword(password);
 		user.setId(id);
 		user.setName(name);
 
