@@ -12,41 +12,43 @@ import com.revature.dao.AdminDAOImp;
 import com.revature.dao.IUserDAO;
 import com.revature.dao.UserDAO;
 import com.revature.exception.DBException;
+import com.revature.exception.ServiceException;
 import com.revature.util.Logger;
 
 public class AdminService {
 
 	private static final Logger logger=Logger.getInstance();
 	AdminDAO admindao=new AdminDAO();
-	public User findByAdminNameAndPassword(String name, String password) {
+	public User findByAdminNameAndPassword(String name, String password) throws ServiceException {
 		User user=null;
 		try {
-			user=admindao.findByAdminNamePassword(name, password);
-		} catch (DBException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			try {
+				user=admindao.findByAdminNamePassword(name, password);
+			} catch (DBException e) {
+			}
+		}  catch (SQLException e) {
+			throw new ServiceException("Unable to get admin data");
 		}
 		return user;
 		
 	}
 	
-	public void sendFundRequest(int categoryId, double amount) throws DBException {
+	public void sendFundRequest(int categoryId, double amount) throws ServiceException {
 		try {
 			admindao.fundRequest(categoryId,amount);
 		} catch (DBException e) {
-			e.printStackTrace();
+			throw new ServiceException("Unable to send fund request");
 		}
 	}
-	public void addCategory(String categoryName) {
+	public void addCategory(String categoryName) throws ServiceException {
 		try {
 			admindao.addCategory(categoryName);
 		} catch (DBException e) {
-			e.printStackTrace();
+			throw new ServiceException("Unable to add  category");
 		}
 	}
 	
-	public List<Transaction> viewResponse()
+	public List<Transaction> viewResponse() throws ServiceException
 	{
 		List<Transaction> list=null;
 	    try {
@@ -54,11 +56,10 @@ public class AdminService {
             try {
 				list = dao.viewResponse();
 			} catch (DBException e) {
-				e.printStackTrace();
 			}
 	        displayTrans(list);
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	    	throw new ServiceException("Unable to view response");
 	    }
 		return list;
 	}
@@ -76,7 +77,7 @@ public class AdminService {
 	        }
 	        logger.info(content);
 		}
-	public List<Category> viewCategory()
+	public List<Category> viewCategory() throws ServiceException
 	{
 		List<Category> list=null;
 	    try {
@@ -84,7 +85,7 @@ public class AdminService {
             list = dao.displayCategory();
             displayCategory(list);
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        throw new ServiceException("Unable to get category");
 	    }
 		return list;
 	}
@@ -99,7 +100,7 @@ public class AdminService {
 	        logger.info(content);
 		}
 	
-	public List<Amount> closeRequest()
+	public List<Amount> closeRequest() throws ServiceException
 	{
 		List<Amount> list=null;
 	    try {
@@ -107,7 +108,7 @@ public class AdminService {
             list = dao.matchAmount();
             displayAmount(list);
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        throw new ServiceException("Unable to view Donations");
 	    }
 		return list;
 	}
