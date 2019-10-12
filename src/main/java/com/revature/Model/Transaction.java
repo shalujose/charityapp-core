@@ -5,14 +5,13 @@ public class Transaction {
 	private int transactionId;
 	private String dateOfTransaction;
 	private int fundrequestId;
-	private int categoryId;
 	private int donorId;
 	private double amount;
 	private String name;
 	@Override
 	public String toString() {
 		return "Transaction [transactionId=" + transactionId + ", dateOfTransaction=" + dateOfTransaction
-				+ ", fundrequestId=" + fundrequestId + ", categoryId=" + categoryId + ", donorId=" + donorId
+				+ ", fundrequestId=" + fundrequestId + ",  donorId=" + donorId
 				+ ", amount=" + amount + ", name=" + name + "]";
 	}
 	public int getTransactionId() {
@@ -33,12 +32,7 @@ public class Transaction {
 	public void setFundrequestId(int fundrequestId) {
 		this.fundrequestId = fundrequestId;
 	}
-	public int getCategoryId() {
-		return categoryId;
-	}
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
+	
 	public int getDonorId() {
 		return donorId;
 	}
