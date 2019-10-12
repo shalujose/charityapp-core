@@ -215,7 +215,6 @@ public class AdminDAO implements AdminDAOImp { // implementation of AdminDAOImp 
 			pst.executeUpdate();
 			logger.debug(" New category added successfully!!!");
 		} catch (SQLException e) {
-			e.printStackTrace();
 			throw new DBException("Unable to add new category ", e);
 		} finally {
 			ConnectionUtil.close(con, pst);
@@ -223,7 +222,7 @@ public class AdminDAO implements AdminDAOImp { // implementation of AdminDAOImp 
 
 	}
 	
-	public User findByAdminNamePassword(String name, String password) throws DBException, SQLException {
+	public User findByAdminNamePassword(String name, String password) throws SQLException {
 		Connection con = ConnectionUtil.getConnection();
 		String sql = "select name,password from admin_details where name = ? and Password = ?";
 		PreparedStatement pst = null;

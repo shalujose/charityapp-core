@@ -22,12 +22,9 @@ public class AdminService {
 	public User findByAdminNameAndPassword(String name, String password) throws ServiceException {
 		User user=null;
 		try {
-			try {
-				user=admindao.findByAdminNamePassword(name, password);
-			} catch (DBException e) {
-			}
+			user=admindao.findByAdminNamePassword(name, password);
 		}  catch (SQLException e) {
-			throw new ServiceException("Unable to get admin data");
+			throw new ServiceException("Invalid name or password");
 		}
 		return user;
 		

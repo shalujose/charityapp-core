@@ -32,12 +32,12 @@ public class UserService {
 		try {
 			user = userdao.findByNamePassword(email, password);
 			if (user == null) {
-				throw new DBException("Invalid login");
+				throw new DBException("Email id and password must be unique");
 			}
 		} catch (DBException e) {
 			throw new ServiceException("Unable to login");
 		} catch (SQLException e) {
-			throw new ServiceException("Unable to login");
+			throw new ServiceException("Email id and password must be unique");
 		}
 		return user;
 
